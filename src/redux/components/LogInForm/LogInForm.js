@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginThunk } from "../../thunks/userThunk/userThunk";
 import { LogInFormStyles } from "./LogInFormStyles";
 
 const LogInForm = () => {
+  let navigate = useNavigate();
   const initialFormState = {
     username: "",
     password: "",
@@ -36,7 +37,11 @@ const LogInForm = () => {
     event.preventDefault();
     await dispatch(loginThunk(actualLogInFormState));
     setLogInFormState(initialFormState);
-    <Link to="/" />;
+    navigate("/", { replace: true });
+  };
+
+  const toRegister = () => {
+    navigate("/register", { replace: true });
   };
 
   return (
@@ -76,6 +81,9 @@ const LogInForm = () => {
           LOG IN
         </button>
       </form>
+      <button onClick={toRegister} className="btn btn-primary">
+        REGISTER
+      </button>
     </LogInFormStyles>
   );
 };
