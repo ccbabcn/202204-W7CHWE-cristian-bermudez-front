@@ -9,7 +9,7 @@ export const loginThunk = (userData) => async (dispatch) => {
 
     const { data } = await axios.post(url, userData);
     const userInfo = jwtDecode(data.token);
-    debugger;
+
     localStorage.setItem("token", data.token);
     dispatch(loginActionCreator(userInfo));
   } catch (error) {
